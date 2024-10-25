@@ -8,7 +8,7 @@
     {
         "№": 2,
         "Topic": "I am looking for a reliable software to manage our customer database. It should be user friendly and have advanced search capabilities.",
-        "label": "Software",
+        "label": "Software", 
         "Solution": null
     },
     {
@@ -31,7 +31,7 @@
     },
     {
         "№": 6,
-        "Topic": "I'm having trouble accessing a shared network folder. I get an error message saying \"permission denied\".",
+        "Topic": "I'm having troubles accessing a shared network folder. I get an error message saying \"permission denied\".",
         "label": "Network",
         "Solution": null
     },
