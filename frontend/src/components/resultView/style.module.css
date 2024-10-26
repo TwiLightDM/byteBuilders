@@ -1,0 +1,53 @@
+.container {
+    width: 395px;
+    height: 450px;
+    padding: 40px;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    overflow-y: scroll;
+}
+
+.solution {
+    border-radius: 6px;
+    background: #f6f6f6;
+    padding: 5px;
+    margin-bottom: 24px;
+}
+
+.presolution {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.block-gray, .block-yellow {
+    margin: 10px auto;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.block-gray {
+    background: #f6f6f6;
+}
+
+.block-yellow {
+    background: rgb(255, 205, 49);
+}
+
+.block-second {
+    margin-top: 5px;
+}
+
+.robot {
+    margin: 5px 0 0 auto;
+}
