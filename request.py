@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score 
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 with open('dataset.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
@@ -75,6 +77,17 @@ def get_solution(query):
     # Генерируем осмысленный ответ, если решения нет
     if solution is None:
         solution = response_templates.get(predicted_label, "We don't have an exact solution, but we recommend contacting a specialist.")
+
+    label_indices = [i for i, label in enumerate(y_train) if label == predicted_label]
+    label_topics_tfidf = X_train_tfidf[label_indices]
+    similarities = cosine_similarity(query_tfidf, label_topics_tfidf).flatten()
+    similar_indices = np.array(label_indices)[similarities.argsort()[-5:][::-1]]
+    similar_topics = [X_train[i] for i in similar_indices]
+
+    print("Похожие запросы:")
+    for i, topic in enumerate(similar_topics, start=1):
+        print(f"{i}. {topic}")
+    
     return solution
 
 # Пример использования
