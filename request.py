@@ -70,7 +70,7 @@ def get_solution(query):
     predicted_label = classifier.predict(query_tfidf)[0]
 
     # Выводим предсказанный label
-    print("Предсказанный label:", predicted_label)
+    print("Predicted label:", predicted_label)
 
     # Ищем готовое решение для предсказанного label
     solution = solution_dict.get(predicted_label)
@@ -87,19 +87,19 @@ def get_solution(query):
     # Получаем похожие темы и соответствующие решения
     similar_topics = [(X_train[i], solutions[train_indices[i]]) for i in similar_indices]
 
-    print("Похожие запросы:")
+    print("Similar requests:")
     for i, (topic, similar_solution) in enumerate(similar_topics, start=1):
         print(f"{i}. {topic}")
         if similar_solution:
-            print(f"   Решение: {similar_solution}")
+            print(f"   Solution: {similar_solution}")
         else:
-            print("   Решение: Нет доступного решения.")
+            print("   Solution: There is no available solution.")
     return solution
 
 # Пример использования
 while True:
-    user_input = input("Введите запрос (topic): ")
+    user_input = input("Enter a request: ")
     if user_input.lower() in ["exit", "quit"]:
         break
     solution = get_solution(user_input)
-    print("Решение:", solution)
+    print("Solution:", solution)
