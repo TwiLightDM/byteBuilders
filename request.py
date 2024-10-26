@@ -35,7 +35,8 @@ for item in data:
     solutions.append(item.get('Solution', None))
 
 # Разделим данные на обучающую и тестовую выборки
-X_train, X_test, y_train, y_test = train_test_split(topics, labels, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test, train_indices, test_indices = train_test_split(topics, labels, range(len(topics)), test_size=0.2, random_state=42)
+
 
 # Преобразуем текстовые данные в векторы с помощью TF-IDF
 vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
@@ -82,12 +83,17 @@ def get_solution(query):
     label_topics_tfidf = X_train_tfidf[label_indices]
     similarities = cosine_similarity(query_tfidf, label_topics_tfidf).flatten()
     similar_indices = np.array(label_indices)[similarities.argsort()[-5:][::-1]]
-    similar_topics = [X_train[i] for i in similar_indices]
+    
+    # Получаем похожие темы и соответствующие решения
+    similar_topics = [(X_train[i], solutions[train_indices[i]]) for i in similar_indices]
 
     print("Похожие запросы:")
-    for i, topic in enumerate(similar_topics, start=1):
+    for i, (topic, similar_solution) in enumerate(similar_topics, start=1):
         print(f"{i}. {topic}")
-    
+        if similar_solution:
+            print(f"   Решение: {similar_solution}")
+        else:
+            print("   Решение: Нет доступного решения.")
     return solution
 
 # Пример использования
