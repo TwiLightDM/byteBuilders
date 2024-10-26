@@ -1,7 +1,11 @@
 from flask import Flask, request, jsonify
-import network, redis
+from flask_cors import CORS  # Импортируем CORS
+import network
 
 app = Flask(__name__)
+
+# Настраиваем CORS для разрешения запросов с localhost:3000
+CORS(app, resources={r"/interaction/*": {"origins": "http://localhost:3000"}})
 
 @app.route('/interaction/askProblem', methods=['POST'])
 def process_request():
@@ -9,9 +13,12 @@ def process_request():
 
     answer = network.get_solution(questionJson.get("question"))
 
-    response = {'answer': answer[0],
-                'problem': answer[1],
-                'similarTopics': answer[2]}
+    response = {
+        'solution': answer[0],
+        'label': answer[1],
+        'percentages': answer[2],
+        'similarTopics': answer[3]
+    }
     return jsonify(response)
 
 if __name__ == '__main__':
