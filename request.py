@@ -19,7 +19,7 @@ nltk.download('wordnet')
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
-def preprocess(text):
+def preprocess(text): 
     text = text.lower() 
     text = re.sub(r'\W', ' ', text)  
     text = ' '.join([lemmatizer.lemmatize(word) for word in text.split() if word not in stop_words])
