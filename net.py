@@ -68,9 +68,15 @@ response_templates = {
 def get_solution(query):
     query_tfidf = vectorizer.transform([preprocess(query)])
     predicted_label = classifier.predict(query_tfidf)[0]
+    
+    label_probabilities = classifier.predict_proba(query_tfidf)[0]
 
-    # Выводим предсказанный label
-    print("Predicted label:", predicted_label)
+    # Вывод вероятностей для всех label
+    label_confidences = sorted(zip(classifier.classes_, label_probabilities * 100), key=lambda x: x[1], reverse=True)
+    print(f"Predicted label: {predicted_label}")
+    print("Probabilities for all labels:")
+    for label, conf in label_confidences:
+        print(f"{label}: {conf:.2f}%")
 
     # Ищем готовое решение для предсказанного label
     solution = solution_dict.get(predicted_label)
