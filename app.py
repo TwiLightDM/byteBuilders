@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Импортируем CORS
-import network
+import net
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ CORS(app, resources={r"/interaction/*": {"origins": "http://localhost:3000"}})
 def process_request():
     questionJson = request.get_json()
 
-    answer = network.get_solution(questionJson.get("question"))
+    answer = net.get_solution(questionJson.get("question"))
 
     response = {
         'solution': answer[0],

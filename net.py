@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
-with open('D:\\dataset.json', 'r', encoding='utf-8') as f:
+with open('./dataset.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 nltk.download('stopwords')
